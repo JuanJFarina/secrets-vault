@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pydantic = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pre-commit = "*"
+pydantic = "*"
+
+[requires]
+python_version = "3.10"
+
+[scripts]
+test = "pytest ./tests --cov"
+precommit = "pre-commit install"
+format = "pre-commit run --all-files"
+build = "python -m build"
+serve = "python secrets_vault/main.py"
