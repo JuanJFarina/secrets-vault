@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from .secret import Secret
 from .vault_path import VaultPath
@@ -6,8 +6,13 @@ from .vault_path import VaultPath
 
 class SecretsVault(BaseModel):
     path: VaultPath
-    version: int = 0
-    secrets: list[Secret] = Field(default_factory=list[Secret])
+    secret: Secret | None = None
+    version: int = 1
 
-    def add_secret(self, key: str, value: str) -> None:
-        self.secrets.append(Secret(key=key, value=value))
+    def modify_secret(self, secret_value: str) -> None:
+        self.secret = Secret(secret_value=secret_value)
+        self.version += 1
+
+    def delete_secret(self) -> None:
+        self.secret = None
+        self.version += 1
