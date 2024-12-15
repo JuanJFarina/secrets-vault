@@ -1,3 +1,4 @@
+import os
 from unittest.mock import MagicMock
 
 import pytest
@@ -17,7 +18,7 @@ def other_secret_value() -> str:
 
 @pytest.fixture()
 def path() -> str:
-    return "path"
+    return "path" + os.path.sep + "test.txt"
 
 
 @pytest.fixture()

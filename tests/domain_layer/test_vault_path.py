@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 import pytest
 from pydantic import ValidationError
 
@@ -10,5 +12,7 @@ def test_create_vault_path_without_path() -> None:
 
 
 def test_create_vault_path(path: str) -> None:
-    vault_path = VaultPath(path=path)
+    with patch("pathlib.Path.mkdir") as mock_mkdir:
+        vault_path = VaultPath(path=path)
     assert vault_path.path == path
+    assert mock_mkdir.called_once()
