@@ -15,4 +15,5 @@ def test_create_vault_path(path: str) -> None:
     with patch("pathlib.Path.mkdir") as mock_mkdir:
         vault_path = VaultPath(path=path)
     assert vault_path.path == path
+    assert vault_path.pure_path
     assert mock_mkdir.called_once()

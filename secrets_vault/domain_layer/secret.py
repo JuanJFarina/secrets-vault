@@ -9,7 +9,7 @@ class Secret(BaseModel):
             return self.secret_value == other.secret_value
         if isinstance(other, str):
             return self.secret_value == other
-        return NotImplemented
+        return False
 
     def __hash__(self) -> int:
         return hash(self.secret_value)

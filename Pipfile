@@ -16,7 +16,7 @@ pydantic = "*"
 python_version = "3.10"
 
 [scripts]
-test = "pytest ./tests --cov"
+test = "pytest ./tests --cov --cov-report=term-missing"
 precommit = "pre-commit install"
 format = "pre-commit run --all-files"
 build = "python -m build"

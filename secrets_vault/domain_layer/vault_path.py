@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, field_validator
 
@@ -23,7 +24,7 @@ class VaultPath(BaseModel):
         create_vault_path(path)
         return path_string
 
-    def __post_init_post_parse__(self) -> None:  # pylint: disable=bad-dunder-name
+    def model_post_init(self, __context: Any) -> None:
         self.pure_path = Path(os.path.join(self.root_path, self.path))  # noqa: PTH118
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
